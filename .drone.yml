@@ -3,7 +3,7 @@ name: default
 
 steps:
   - name: test
-    image: haggaie/symbiyosys:latest
+    image: andrsmllr/symbiyosys:latest
     commands:
       - apt-get update && apt-get install -y make curl git
       - cd formal

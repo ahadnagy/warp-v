@@ -5,4 +5,5 @@ steps:
   - name: test
     image: haggaie/symbiyosys:latest
     commands:
+      - apt-get update && apt-get install make
       - make verif;

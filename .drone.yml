@@ -5,6 +5,6 @@ steps:
   - name: test
     image: haggaie/symbiyosys:latest
     commands:
-      - apt-get update && apt-get install -y make curl
+      - apt-get update && apt-get install -y make curl git
       - cd formal
       - make verif;

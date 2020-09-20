@@ -6,4 +6,5 @@ steps:
     image: haggaie/symbiyosys:latest
     commands:
       - apt-get update && apt-get install make
+      - cd formal
       - make verif;

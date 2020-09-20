@@ -2,9 +2,9 @@
 
 SHELL=/bin/bash
 
-export PATH:=$(shell pwd)/env/bin:$(PATH)
+#export PATH:=$(shell pwd)/env/bin:$(PATH)
 
-.PHONY: all clean compile verif env riscv-formal
+.PHONY: all clean compile verif riscv-formal
 
 
 # Run SandPiper Cloud Edition(TM) (SandPiper(TM) in the cloud for open-source code).
@@ -13,12 +13,12 @@ out/warp-v_formal.sv: warp-v_formal.tlv ../warp-v.tlv
 	curl -F 'top.tlv=@warp-v_formal.tlv' -F 'files[]=@../warp-v.tlv' http://saas.makerchip.com/sandpiper | tar -zx && cat out/stdout
 	exit `cat out/status`
 
-env: env/PASSED
+#env: env/PASSED
 
 # Use env/PASSED to indicate that the environment has been successfully built.
-env/PASSED:
-	@# Just update timestamp if that's all that's needed, or make_env.sh.
-	if [ -e env/PASSED ]; then touch env/PASSED; else ./make_env.sh; fi
+#env/PASSED:
+#	@# Just update timestamp if that's all that's needed, or make_env.sh.
+#	if [ -e env/PASSED ]; then touch env/PASSED; else ./make_env.sh; fi
 
 riscv-formal: riscv-formal/README.md
 
@@ -29,7 +29,7 @@ riscv-formal/README.md:
 
 compile: out/warp-v_formal.sv
 
-verif: checks.cfg genchecks.py out/warp-v_formal.sv env riscv-formal
+verif: checks.cfg genchecks.py out/warp-v_formal.sv riscv-formal
 	@# Should use this, but until Clifford accepts pull request, we have a local copy of genchecks.py.
 	@#python3 riscv-formal/checks/genchecks.py --basedir riscv-formal
 	python3 ./genchecks.py --basedir ./riscv-formal
